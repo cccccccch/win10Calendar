@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #141414;
+        }
+
+        .container {
+            display: grid;
+            margin: 0 auto;
+            width: 90%;
+            margin-top: 1em;
+            color: #f0f0f0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .card {
+            aspect-ratio: 4/3;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            /* border-radius: inherit; */
+            inset: 0;
+            background: radial-gradient(closest-side circle, #fff, transparent);
+            transform: translate(var(--x, -9999px), var(--y, -9999px));
+        }
+
+        .inner {
+            position: absolute;
+            border-radius: inherit;
+            inset: 8px;
+            background-color: #222;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="inner">inner001</div>
+        </div>
+        <div class="card">
+            <div class="inner">inner002</div>
+        </div>
+        <div class="card">
+            <div class="inner">inner003</div>
+        </div>
+        <div class="card">
+            <div class="inner">inner004</div>
+        </div>
+        <div class="card">
+            <div class="inner">inner005</div>
+        </div>
+        <div class="card">
+            <div class="inner">inner006</div>
+        </div>
+        <div class="card">
+            <div class="inner">inner007</div>
+        </div>
+        <div class="card">
+            <div class="inner">inner008</div>
+        </div>
+        <div class="card">
+            <div class="inner">inner009</div>
+        </div>
+    </div>
+    <script>
+        const container = document.querySelector('.container');
+        const cards = document.querySelectorAll('.card');
+        window.addEventListener('mousemove', (e) => {
+            for (const card of cards) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            }
+        })
+    </script>
+</body>
+
+</html>
